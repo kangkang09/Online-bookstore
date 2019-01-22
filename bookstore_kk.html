@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	    <head> 
+    
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<meta name="keywords" content="Core Java, Vol. 2: Advanced Features (8/e),ISBN,9780132354790,Paperback, English"/>
+		<meta name="description" content="Online Book Store is 24x7 web store with millions of books!"/>
+		<meta name="author" content="BookStore.com"/>
+        
+        <title>Website Title</title>
+        <link rel="stylesheet" type="text/css" href="css/main.css" /> 
+		<link rel="stylesheet" type="text/css" href="css/product_info.css" /> 
+		<link rel="stylesheet" type="text/css" href="css/960.css" /> 
+        
+        <link rel="stylesheet" type="text/css" href="styles.css" />
+        
+		<script type="text/javascript">	
+			function currency_translate2(){
+				var currency=document.getElementById('currency_convert2');
+  			
+  			if(currency.value!="no"){
+				  currency_value = currency.value;
+				  var code = currency_value.substr(currency_value.length-3, currency_value.length);
+				  var currency = currency_value.substr(0, currency_value.length-4);
+				  var price_now = document.getElementById("newPrice_label");
+				  var HK_price = document.getElementById("HK_price")
+				  var final_price = currency*HK_price.value;
+
+
+      	
+      	/*
+		Code here is not finished yet, 
+		Can you complete it!
+		*/
+      	
+      		price_now.innerHTML=code+'$'+final_price.toFixed(2); // ** Update the Price in another Currency
+  			}
+			  
+  		}
+var timerlen = 5;
+var slideAniLen = 200;
+
+var timerID = new Array();
+var startTime = new Array();
+var obj = new Array();
+var endHeight = new Array();
+var moving = new Array();
+var dir = new Array();
+
+var currTId = null;
+var currDId = null;
+var currTag0 = null;
+
+function slidedown(objname){
+        if(moving[objname])
+                return;
+
+        if(document.getElementById(objname).style.display != "none")
+                return; // cannot slide down something that is already visible
+
+        moving[objname] = true;
+        dir[objname] = "down";
+
+        startslide(objname);
+}
+
+function slideup(objname){
+
+        if(moving[objname])
+                return;
+
+        if(document.getElementById(objname).style.display == "none")
+                return; // cannot slide up something that is already hidden
+
+        moving[objname] = true;
+        dir[objname] = "up";
+        startslide(objname);
+}
+
+function startslide(objname){
+		obj[objname] = document.getElementById(objname);
+
+		if(dir[objname] == "down"){
+			obj[objname].style.height = "1px";
+		}
+
+		obj[objname].style.display = "block";
+		startTime[objname] = (new Date()).getTime();
+
+		endHeight[objname] = obj[objname].scrollHeight;
+		timerID[objname] = setInterval('slidetick(\'' + objname + '\');',timerlen);
+}
+
+function slidetick(objname){
+        var elapsed = (new Date()).getTime() - startTime[objname];
+        if (elapsed > slideAniLen)
+                endSlide(objname)
+        else {
+                var d =Math.round(elapsed / slideAniLen * endHeight[objname]);
+                if(dir[objname] == "up")
+                        d = endHeight[objname] - d;
+
+                obj[objname].style.height = d + "px";
+        }
+
+        return;
+}
+
+function endSlide(objname){
+        clearInterval(timerID[objname]);
+
+        if(dir[objname] == "up")
+                obj[objname].style.display = "none";
+
+        obj[objname].style.height = endHeight[objname] + "px";
+
+        delete(moving[objname]);
+        delete(timerID[objname]);
+        delete(startTime[objname]);
+        delete(endHeight[objname]);
+        delete(obj[objname]);
+        delete(dir[objname]);
+
+        return;
+}
+
+
+function singleLink_toggleSlide(objname){
+  if(document.getElementById(objname).style.display == "none"){
+    // div is hidden, so let's slide down
+    slidedown(objname);
+  }else{
+    // div is not hidden, so slide up
+    slideup(objname);
+  }
+}
+
+function changeBookDisplay(obj,tag,id) {
+	var first_id=id.toString().substr(0,1);	
+		
+	var objname='bestSeller_content'+'_'+first_id;
+	var obj_obj=document.getElementById(objname);
+    if(obj_obj!=null)obj_obj.style.height=obj_obj.scrollHeight;
+    
+	if(currTId!=null){
+		if(currTag!=null) {
+			if(returnElement(currTId)) returnElement(currTId).style.display="block";
+			if(returnElement(currDId)) returnElement(currDId).style.display="none";
+			
+			if(currTag!=tag) {
+				if(returnElement(currTId)) returnElement(currTId).style.display="block";
+				if(returnElement(currDId)) returnElement(currDId).style.display="none";
+				var currTIdReset = currTag + "1";
+				var currDIdReset = currTag + "_Over1";
+				if(returnElement(currTIdReset)) returnElement(currTIdReset).style.display="none";
+				if(returnElement(currDIdReset)) returnElement(currDIdReset).style.display="block";
+			}
+		}
+	}
+
+	var Tid = tag + id;
+	var Did = tag + "_Over" + id;
+
+	if(returnElement(Tid)) returnElement(Tid).style.display="none";
+	if(returnElement(Did)) returnElement(Did).style.display="block";
+
+	currTag = tag;
+	currTId = Tid;
+	currDId = Did;
+}
+
+function changeBookDisplay2(obj_id,tag,id,type){
+	var first_id=id.toString().substr(0,1);	
+	
+	var id = tag+first_id;
+	var overid =  tag+"_Over"+first_id;
+	
+	
+	
+	
+//	alert(thisid);
+	$(obj_id).hide();
+	
+	if(type == 1)
+		$(overid).show();
+	else
+		$(id).show();
+	
+}	  		
+</script> 	
+	
+    <title>Core Java, Vol. 2: Advanced Features (8/e)</title>
+        
+        <!-- Internet Explorer HTML5 enabling code: -->
+        
+        <!--[if IE]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        
+        <style type="text/css">
+        .clear {
+          zoom: 1;
+          display: block;
+        }
+        </style>
+
+        
+        <![endif]-->
+        
+    </head>
+    
+    <body>
+    	
+    	<section id="page"> <!-- Defining the #page section with the section tag -->
+    
+            <header> <!-- Defining the header section of the page with the appropriate tag -->
+            
+                <hgroup>
+                    <h1>Website Title</h1>                 
+                </hgroup>
+                                
+                <nav class="clear"> <!-- The nav link semantically marks your main site navigation -->
+                    <ul>
+                        <li><a href="#article1">HOME</a></li>
+                        <li><a href="#article2">ABOUT</a></li>
+                        <li><a href="#article3">BOOKS</a></li>
+						<li><a href="#article4">CONTACT</a></li>
+                    </ul>
+                </nav>
+            
+            </header>
+            
+            <section id="articles"> <!-- A new section with the articles -->
+
+				<!-- Article 1 start -->
+
+                <div class="line"></div>  <!-- Dividing line -->
+                
+                <article id="article1"> <!-- The new article tag. The id is supplied so it can be scrolled into view. -->
+                    <h2>HOME</h2>
+                    
+                    <div class="line"></div>
+                    
+                    <div class="articleBody clear">
+                    
+                    	<figure> <!-- The figure tag marks data (usually an image) that is part of the article -->
+	                    	<img src="images/reading.jpg" width="600" height="320" />
+                        </figure>                        
+                        <p>This article display the front page of the website</p>                        
+                    <a href="#" class="up">Go UP</a>
+                    <video width="340" controls autoplay>
+                        <source src="./big_buck_bunny.mp4"" type="video/mp4" />
+                        </video>
+                    </div>
+                </article>
+                
+				<!-- Article 1 end -->
+
+
+				<!-- Article 2 start -->
+
+                
+                <article id="article2">
+                    <h2>ABOUT US</h2>
+                    
+                    <div class="line"></div>
+                    
+                    <div class="articleBody clear">
+                    	<figure>
+	                    	<img src="images/shop.jpg" width="620" height="340" />
+                        </figure>                        
+                        <p>
+                        We are an online book store. We have thousands of books in stock.<br/> 
+                        We can search the books by ISBN or author.<br/>
+                        We accept Paypal and Visa Credit Cards. <br/>
+                        We will ship the books within 1-2 business days.<br/></p> 
+                    </div>
+					<a href="#" class="up">Go UP</a>
+                </article>
+                
+				<!-- Article 2 end -->
+
+				<!-- Article 3 start -->
+
+                <div class="line"></div>
+                
+                <article id="article3">
+                    <h2>BOOKS</h2>
+                    
+                    <div class="line"></div>
+                    
+                    <div class="articleBody clear">                    	
+                        
+                        <p>This article shows the book details</p>          
+                    </div>
+                    <a href="#" class="up">Go UP</a>
+                    <div id="main">
+                        <table id="productInfo_table">
+                            <tbody>
+                                <tr>
+                                    <td class="productName" colspan="2">Core Java, Vol. 2: Advanced Features (8/e)</td>
+                                </tr>		
+                                <tr>
+                                    <td class="productLabel">Author</td>
+                                    <td class="productDesc">Cay S. Horstmann, Gary Cornell</td>
+                                </tr>	
+                                <tr>
+                                    <td class="productLabel">Publisher</td>
+                                    <td class="productDesc">Prentice Hall Press, Inc.</td>
+                                </tr>
+                                <tr>
+                                    <td class="productLabel">ISBN</td>
+                                    <td class="productDesc">9780132354790</td>
+                                </tr>
+                                 <tr>
+                                    <td class="productLabel">Classification</td>
+                                    <td class="productDesc">Computer &amp; Information Technology > Programming </td>
+                                </tr>
+                                <tr>
+                                    <td class="productLabel">Price</td>
+                                    <td class="productDesc"><span id="newPrice_label">HK$385.00</span></td>
+                                </tr>
+                                        
+                                <tr>
+                                    <td id="productLabel">Exchange Rate Reference</td>
+                                    <td id="productDesc">
+                                        <form id="productInfo_currency" action="">
+                                        <input type="hidden" id="HK_price" value="150.00"> 
+                                            <select id="currency_convert2" name="currency_convert2" onchange="currency_translate2()" class="productInfo_currency_select">
+                                                <option value="no" selected="selected">Exchange Rate</option>
+                                                <option label="HKD" value="1.000HKD">HKD</option>
+                                                <option label="USD" value="0.128USD">USD</option>
+                                                <option label="RMB" value="0.899RMB">RMB</option>
+                                                <option label="TWD" value="3.903TWD">TWD</option>
+                                                <option label="JPY" value="13.173JPY">JPY</option>
+                                                <option label="CAD" value="0.129CAD">CAD</option>
+                                                <option label="EUR" value="0.082EUR">EUR</option>
+                                            </select>
+                                        </form>
+                                    </td>
+                                </tr>
+                                    
+                                
+                               <tr>
+                                    <td class="productLabel">Stock Status</td>
+                                    <td class="productDesc">Out of Stock</td>
+                                </tr>
+                                        <tr>
+                                    <td class="productLabel" colspan="2">
+                                        <a href="javascript:;" onmousedown="singleLink_toggleSlide('extraInfo_Area');" id="extraInfo_link"> 
+                                            <img src="./images/extraInfo_arrow.gif" width="15" height="14" id="extraInfo_img" alt="More Information"/>More information 
+                                        </a>
+                                    </td>
+                                </tr>	
+                                <tr>
+                                    <td class="productDesc" colspan="2">
+                                        <div id="extraInfo_Area" style="display: none; overflow: hidden;">
+                                        <table id="extraInfo_table">			
+                                            <tbody>
+                                                <tr>
+                                                    <td class="productLabel">Language</td>
+                                                    <td class="productDesc">English</td>
+                                                </tr>	
+                                                <tr>
+                                                    <td class="productLabel">Pages</td>
+                                                    <td class="productDesc">1056 pages</td>
+                                                </tr>
+                                                 <tr>
+                                                    <td class="productLabel">Edition</td>
+                                                    <td class="productDesc">Eighth Edition</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="productLabel">Binding</td>
+                                                    <td class="productDesc">Paperback</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="productLabel">Description</td>
+                                                    <td class="productDesc">
+                        The revised edition of the classic Core Java, Volume II–Advanced Features, covers 
+                        advanced user-interface programming and the enterprise features of the Java SE 6 platform. 
+                        Like Volume I (which covers the core language and library features), this volume has been 
+                        updated for Java SE 6 and new coverage is highlighted throughout.
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>	
+                                    </div>
+                                    </td>
+                                </tr> 
+                                
+                                <tr>
+                                    <td class="productImg" colspan="2">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                            <div class="container_12" id="wrapper"> 
+                                                          <div class="grid_8" id="content">
+                                                               <div class="grid_6 prefix_1 suffix_1" id="gallery"> 
+                                                                
+                                                              <div id="pictures"> 
+                                                                   <img src="images/9780132354790-01.png" alt="" /> 
+                        
+                                                                </div>           
+                                                            </div> 
+                                                            
+                                                          </div> 
+                                                        </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                    </td>
+                                </tr>
+                                
+                                </tbody>
+                        </table>
+                        </div>	
+                        </div>
+                </article>
+                
+				<!-- Article 3 end -->
+				
+				<!-- Article 4 start -->
+
+                <div class="line"></div>
+                
+                <article id="article4">
+                    <h2>CONTACT US</h2>
+                            <P>Please provide us your info so that we can contact you.</P>
+                            <form id="contact_form" name="contact" action="" method="post">
+                                Name:<input id="name" type="text"/><br/>
+                                Email:<input id="email" type="text"/><br/>
+                                Message:<textarea id="message"></textarea><br/>
+                                <input id="Send" type="button" value="Send"/></form>
+                        </div>
+                    </div>
+                    <div id="footer"></div>
+                </div>
+                </body>
+                </article>
+                
+				<!-- Article 4 end -->
+
+            </section>
+
+        <footer> <!-- Marking the footer section -->
+
+           <div class="line"></div>
+           
+           <p>Copyright 2010 - online-bookstore.com</p> <!-- Change the copyright notice -->
+           
+           <a href="#" class="up">Go UP</a>
+
+        </footer>
+            
+		</section> <!-- Closing the #page section -->
+        
+        <!-- JavaScript Includes -->
+        
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+        <script src="jquery.scrollTo-1.4.2/jquery.scrollTo-min.js"></script>
+        <script src="script.js"></script>
+            
+        
+    </body>
+</html>
